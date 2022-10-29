@@ -30,6 +30,11 @@ void onePlayer(char name[])
 
         std::cout << std::endl;
         std::cout << std::endl
+        
+        ///start editing from from here
+        
+        std::cout << std::endl;
+        std::cout << std::endl
         std::cout << "¿CONTINUAR LANZANDO (S/N)?: ";
         std::cin >> vv;
 
