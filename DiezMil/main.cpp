@@ -14,7 +14,7 @@ int main()
 {
     setlocale(LC_ALL, "spanish");
 
-    char jugador1[30];
+    char playerOne[30];
     int opcion = 0;
     while (opcion != 5)
     {
@@ -37,9 +37,9 @@ int main()
         case 1:
             
             printf("Por favor, ingrese el nombre del jugador uno: ");
-            cin >> jugador1;
+            cin >> playerOne;
 
-            unJugador(jugador1);
+            onePlayer(playerOne);
 
             break;
 

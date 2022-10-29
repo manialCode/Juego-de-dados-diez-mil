@@ -1,12 +1,12 @@
 #ifndef JUEGO_H_INCLUDED
 #define JUEGO_H_INCLUDED
 
-void unJugador(char nombre[]);
+void onePlayer(char name[]);
 
-void unJugador(char nombre[])
+void onePlayer(char name[])
 {
-    int arr[6], i = 1, puntosJugador1 = 0;
-    int puntajeRonda = 0, rondaN = 0, lanzamientoN = 0;
+    int arr[6], i = 1, onePlayerPoints = 0;
+    int roundPoint = 0, rondaN = 0, numberOfRelease = 0;
     char vv;
     bool v = true;
 
@@ -15,14 +15,14 @@ void unJugador(char nombre[])
         system("cls");
 
         rondaN++;
-        lanzamientoN++;
+        numberOfRelease++;
 
-        std::cout << "TURNO DE " << nombre << " | "
+        std::cout << "TURNO DE " << name << " | "
                   << "RONDA N°" << rondaN << " | "
-                  << "PUNTAJE TOTAL: " << puntosJugador1 << " PUNTOS" << std::endl;
+                  << "PUNTAJE TOTAL: " << onePlayerPoints << " PUNTOS" << std::endl;
         std::cout << "------------------------------------------------------------------ " << std::endl;
-        std::cout << "PUNTAJE DE LA RONDA: " << puntajeRonda << std::endl;
-        std::cout << "LANZAMIENTO N°" << lanzamientoN << std::endl;
+        std::cout << "PUNTAJE DE LA RONDA: " << roundPoint << std::endl;
+        std::cout << "LANZAMIENTO N°" << numberOfRelease << std::endl;
         std::cout << "------------------------------------------------------------------" << std::endl;
 
         cargarAleatorio(arr, 6, 6);
@@ -30,7 +30,7 @@ void unJugador(char nombre[])
 
         std::cout << std::endl;
         std::cout << std::endl
-                  << "¿CONTINUAR LANZANDO (S/N)?: ";
+        std::cout << "¿CONTINUAR LANZANDO (S/N)?: ";
         std::cin >> vv;
 
         if (vv == 'S' || vv == 's')
