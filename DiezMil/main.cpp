@@ -4,11 +4,12 @@
 #include <ctime>
 #include <locale.h>
 #include <conio.h>
-#include "funciones.h"
-#include "juego.h"
+
 #include <string.h>
 
 using namespace std;
+#include "funciones.h"
+#include "juego.h"
 
 int main()
 {
@@ -35,9 +36,9 @@ int main()
         {
 
         case 1:
-            
+
             printf("Por favor, ingrese el nombre del jugador uno: ");
-            cin >> playerOne;
+            cargarCadena(playerOne, 30);
 
             onePlayer(playerOne);
 
@@ -48,7 +49,7 @@ int main()
             break;
 
         case 3:
-
+            ///Mejor Jugador
             break;
 
         case 4:
