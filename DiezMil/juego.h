@@ -37,24 +37,28 @@ void reglas(){
             system("pause");
 
 }
+
 void onePlayer(char name[])
 {
-    int dado[6], i = 1, puntaje = 0;
-    int roundPoint = 0, rondaN = 0, numberOfRelease = 0, comparePoints[8];
+    int dado[6], i = 1, j, puntaje = 0, roundPoints = 0;
+    int roundPoint = 0, numberOfRelease = 0, comparePoints[8];
     char vv;
     bool v = true;
     int repeticionDeDado[6];
     int numeroRepetido;
 
-    while(puntaje != 10000 && v){
+        for(j = 1; j <= 10; j++){
+        if(puntaje == 10000)j = 10;
+        roundPoint = 0;
+
+        while(v){
 
         system("cls");
         int comparePoints[8] = {0, 0, 0, 0, 0, 0, 0, 1};
-        rondaN++;
         numberOfRelease++;
 
         std::cout << "TURNO DE " << name << " | "
-                  << "RONDA N°" << rondaN << " | "
+                  << "RONDA N°" << j << " | "
                   << "PUNTAJE TOTAL: " << puntaje << " PUNTOS" << std::endl;
         std::cout << "------------------------------------------------------------------ " << std::endl;
         std::cout << "PUNTAJE DE LA RONDA: " << puntaje << std::endl;
@@ -113,25 +117,37 @@ void onePlayer(char name[])
             comparePoints[6] = 10000;
         }
 
-        if(maximoVector(comparePoints, 8) != 7)
-            puntaje += comparePoints[maximoVector(comparePoints, 7)];
-        else if(maximoVector(comparePoints, 8) == 7)puntaje = 0;
+
+        if(maximoVector(comparePoints, 8) == 7)roundPoint = 0;
 
         mostrar(maximoVector(comparePoints, 8));
-         std::cout << comparePoints[maximoVector(comparePoints, 7)] << std::endl;
+        roundPoint +=comparePoints[maximoVector(comparePoints, 7)];
+        std::cout << roundPoint << std::endl;
+
+        if(maximoVector(comparePoints, 8) == 7)v = false;
 
         std::cout << std::endl;
         std::cout << std::endl;
         std::cout << "¿CONTINUAR LANZANDO (S/N)?: ";
         std::cin >> vv;
 
-        if (vv == 'S' || vv == 's')
+        if (vv == 'S' || vv == 's'){
             v = true;
-        if (vv == 'N' || vv == 'n')
+
+        }
+        if (vv == 'N' || vv == 'n'){
             v = false;
+             if(roundPoint + puntaje <= 10000)
+            puntaje += roundPoint;
+        }
 
         system("cls");
     }
+
+    if(j < 10)v = true;
+
+    }
+
 
 }
 
