@@ -118,7 +118,10 @@ void onePlayer(char name[])
         }
 
 
-        if(maximoVector(comparePoints, 8) == 7)roundPoint = 0;
+        if(maximoVector(comparePoints, 8) == 7){
+            j++;
+            roundPoint = 0;
+        }
 
         mostrar(maximoVector(comparePoints, 8));
         roundPoint +=comparePoints[maximoVector(comparePoints, 7)];
