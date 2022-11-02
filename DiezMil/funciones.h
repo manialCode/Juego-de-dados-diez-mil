@@ -8,7 +8,7 @@
 #include<ctime>
 */
 
-/// DECLARACI�N/PROTOTIPO DE FUNCIONES
+/// DECLARACIÓN/PROTOTIPO DE FUNCIONES
 void cargarVector(int v[], int tam); /// asigna valores a cada una de las posiciones del vector
 
 void mostrarVector(int v[], int tam); /// muestra lo que contiene cada una de las posiciones del vector
@@ -31,6 +31,16 @@ int sumarVector(int v[], int tam); /// suma los valores contenidos en el vector
 void copiarVector(int v[], int v2[], int tam); /// copia el vector v en v2
 
 bool compararVectores(int v[], int v2[], int tam); // compara los dos vectores que recibe. Si son iguales ///devuelve true, si no devuelve false
+
+void cargarCadena(char *palabra, int tamano);
+
+int juegoDeUno(int combinacion[]);
+int juegoDeCinco(int combinacion[]);
+int trioDeUno(int combinacion[]);
+int trioDeX(int combinacion[]);
+int trioUnoAmpliado(int combinacion[]);
+int escaleraLarga(int combinacion[]);
+int sexteto(int combinacion[]);
 
 /// Desarrollo de funciones / Definiciones
 int posicionNumeroEnVector(int v[], int tam, int numero)
@@ -162,6 +172,90 @@ void cargarVector(int v[], int tam)
         std::cout << "INGRESE NUMERO: ";
         std::cin >> v[i];
     }
+}
+
+    void cargarCadena(char *palabra, int tamano)
+    {
+    int i = 0;
+    fflush(stdin);
+
+    for (i = 0; i < tamano; i++)
+    {
+        palabra[i] = std::cin.get();
+        if (palabra[i] == '\n') break;   
+    }
+
+    palabra[i] = '\0';
+
+    fflush(stdin);
+    }
+
+int juegoDeUno(int combinacion[])
+{
+    if (combinacion[1] == 1)
+        return 100;
+    else if (combinacion[1] == 2)
+        return 200;
+    else
+        return 0;
+}
+
+int juegoDeCinco(int combinacion[])
+{
+    if (combinacion[5] == 1)
+        return 50;
+    else if(combinacion[5] == 2)
+        return 100;
+    else return 0;
+}
+
+int trioDeUno(int combinacion[])
+{
+    if (combinacion[1] == 3)
+        return 1000;
+    else
+        return 0;
+}
+
+int trioDeX(int combinacion[])
+{
+    int i, posLast;
+    for (i = 2; i <= 6; i++)
+        if (combinacion[i] >= 3) posLast = i;
+    
+    if(combinacion[posLast] >= 3)
+        return posLast * 100;
+    else return 0;
+}
+
+int trioUnoAmpliado(int combinacion[])
+{
+    if (combinacion[1] == 4 || combinacion[1] == 5)
+        return 2000;
+    else
+        return 0;
+}
+
+int escaleraLarga(int combinacion[])
+{
+    int i, c = 0;
+
+    for (i = 1; i <= 6; i++)
+        if (combinacion[i] == 1)
+            c++;
+
+    if (c == 6)
+        return 1500;
+    else
+        return 0;
+}
+
+int sexteto(int combinacion[])
+{
+    if (combinacion[1] == 6)
+        return 10000;
+    else
+        return 0;
 }
 
 #endif // FUNCIONES_H_INCLUDED
