@@ -29,7 +29,7 @@ bool trioDeUno(int combinacion[]){
 int trioDeX(int combinacion[]){
     int i, posLast;
     for(i = 2; i <= 6; i++)
-        if (combinacion[i] == 3)posLast = i;            
+        if (combinacion[i] >= 3)posLast = i;            
     
     return posLast;
 }

@@ -2,8 +2,6 @@
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
-#include "funciones.h"
-#include "Pruebas.h"
 
 using namespace std;
 
@@ -24,6 +22,8 @@ int main(int argc, const char **argv)
         for (i = 1; i <= 6; i++){
             repeticionDeDado[i] = contarNumerosRepetidos(dado, i, 6);
         }
+
+        std::cout << "6 repetido" << repeticionDeDado[6] << std::endl;
         
         if (juegoDeUno(repeticionDeDado))
         {
