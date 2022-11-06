@@ -14,8 +14,9 @@ int main()
 {
     setlocale(LC_ALL, "spanish");
 
-    char playerOne[30];
-    int option = 0;
+    int minRound = 0, maxScore = 0;
+    char playerOne[30], playerTwo[30];
+    int option = 0, *scoreMatch = 0;
     while (option != 5)
     {
         option = 0;
@@ -36,45 +37,48 @@ int main()
         {
 
         case 1:
-            
+
             printf("Por favor, ingrese el nombre del jugador uno: ");
             cargarCadena(playerOne, 30);
 
-            onePlayer(playerOne);
+            scoreMatch = onePlayer(playerOne);
 
             break;
 
         case 2:
+            printf("Por favor, ingrese el nombre del jugador uno: ");
+            cargarCadena(playerOne, 30);
+            
+            printf("Por favor, ingrese el nombre del jugador dos: ");
+            cargarCadena(playerTwo, 30);
 
             break;
 
         case 3:
+            if (scoreMatch != 0)
+            {
+                if (*(scoreMatch + 2) == 1)
+                    std::cout << "Nombre: " << playerOne << std::endl;
 
+                if (*(scoreMatch + 2) == 2)
+                    std::cout << "Nombre: " << playerTwo << std::endl;
+
+                if (maxScore == 0 || *scoreMatch > maxScore || *scoreMatch == 10000)
+                    maxScore = *scoreMatch;
+                std::cout << "Puntaje: " << maxScore << std::endl;
+
+                if (minRound == 0 || (*(scoreMatch + 1)) < minRound)
+                    minRound = *(scoreMatch + 1);
+                std::cout << "Rondas Jugadas: " << minRound << std::endl;
+            }
+            else
+                std::cout << "No hubo partidas registradas" << std::endl;
+            system("pause");
             break;
 
         case 4:
             system("cls");
-            cout << "                   ||REGLAS DEL JUEGO||                    " << endl;
-            cout << "" << endl;
-            cout << "- El objetivo del juego es obtener 10000 puntos en la menor cantidad de rondas posibles. Una ronda puede estar compuesta por varios lanzamientos. Un lanzamiento consiste en tirar seis dados y evaluar sus valores para determinar el puntaje." << endl;
-            cout << "" << endl;
-            cout << "- El puntaje de un lanzamiento esta determinado por una serie de reglas que figuran en la sección Combinaciones ganadoras." << endl;
-            cout << "" << endl;
-            cout << "" << endl;
-            cout << "- Si en un lanzamiento el jugador obtiene una combinación ganadora entonces acumulará provisoriamente el puntaje correspondiente." << endl;
-            cout << "" << endl;
-            cout << "- Luego de un lanzamiento ganador, el jugador debe elegir si desea volver a lanzar los dados o asegurarse el puntaje acumulado hasta el momento. Si en un lanzamiento el jugador no obtiene una combinación ganadora perderá todo el puntaje acumulado de esa ronda y será el turno del otro jugador." << endl;
-            cout << "" << endl;
-            cout << "- Esta es la razón por la que seguir lanzando es riesgoso. La posibilidad de hacer más puntos debe ser considerada con el riesgo de perder todo lo que se gana durante un turno." << endl;
-            cout << "" << endl;
-            cout << "- Una vez que un jugador decide finalizar el turno, todo el puntaje acumulado en el turno se acumulará al puntaje total del jugador." << endl;
-            cout << "" << endl;
-            cout << "- Cuando un jugador obtiene exactamente 10000 puntos, el juego termina. Si un jugador se excede de los 10000 puntos volverá al puntaje que tenía previamente al comenzar la ronda." << endl;
-            cout << "" << endl;
-            cout << "         ||EJEMPLO||          " << endl;
-            cout << "" << endl;
-
-            cout << "--  Si en el inicio de una ronda el jugador tiene 9000 puntos y en transcurso de la ronda termina obteniendo 1500 puntos, entonces, como el puntaje acumulado total superarán los diez mil, la cantidad de puntos no variará, conservando los 9000 puntos que tenía al inicio.  --" << endl;
+            reglas();
             system("pause");
             break;
 

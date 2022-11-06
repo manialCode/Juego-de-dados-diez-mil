@@ -2,7 +2,7 @@
 #define JUEGO_H_INCLUDED
 
 void show(int winningCombination);
-void onePlayer(char name[]);
+int* onePlayer(char name[]);
 void reglas();
 
 void reglas()
@@ -31,10 +31,9 @@ void reglas()
     system("pause");
 }
 
-void onePlayer(char name[])
+int* onePlayer(char name[])
 {
-
-    int dado[6], i = 1, j, score = 0, roundPoints = 0;
+    int dado[6] , i = 1, j, score = 0, roundPoints = 0;
     int roundPoint = 0, numberOfRelease = 0, comparePoints[8];
     bool v = true;
     int numeroRepetido;
@@ -137,9 +136,10 @@ void onePlayer(char name[])
         }
 
         if (j <= 10) v = true;
-        
     }
-}
+    static int onePlayerMatch[3] = { score, j, 1};
+    return onePlayerMatch;  
+} 
 
 void show(int winningCombination)
 {
