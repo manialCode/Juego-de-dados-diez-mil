@@ -1,7 +1,7 @@
 #ifndef JUEGO_H_INCLUDED
 #define JUEGO_H_INCLUDED
 
-void mostrar(int winningCombination);
+void show(int winningCombination);
 void onePlayer(char name[]);
 void reglas();
 
@@ -18,7 +18,7 @@ void reglas()
     std::cout << "" << std::endl;
     std::cout << "- Luego de un lanzamiento ganador, el jugador debe elegir si desea volver a lanzar los dados o asegurarse el puntaje acumulado hasta el momento. Si en un lanzamiento el jugador no obtiene una combinación ganadora perderá todo el puntaje acumulado de esa ronda y será el turno del otro jugador." << std::endl;
     std::cout << "" << std::endl;
-    std::cout << "- Esta es la razón por la que seguir lanzando es riesgoso. La posibilidad de hacer más puntos debe ser considerada con el riesgo de perder todo lo que se ganá durante un turno." << std::endl;
+    std::cout << "- Esta es la razón por la que seguir lanzando es riesgoso. La posibilidad de hacer más puntos debe ser considerada con el riesgo de perder todo lo que se gana durante un turno." << std::endl;
     std::cout << "" << std::endl;
     std::cout << "- Una vez que un jugador decide finalizar el turno, todo el puntaje acumulado en el turno se acumulará al puntaje total del jugador." << std::endl;
     std::cout << "" << std::endl;
@@ -27,13 +27,13 @@ void reglas()
     std::cout << "         ||EJEMPLO||          " << std::endl;
     std::cout << "" << std::endl;
 
-    std::cout << "--  Si en el inicio de una ronda el jugador tiene 9000 puntos y en transcurso de la ronda termina obteniendo 1500 puntos, entonces, como el puntaje acumulado total superaráa los diez mil, la cantidad de puntos no variará, conservando los 9000 puntos que tenía al inicio.  --" << std::endl;
+    std::cout << "--  Si en el inicio de una ronda el jugador tiene 9000 puntos y en transcurso de la ronda termina obteniendo 1500 puntos, entonces, como el puntaje acumulado total superará los diez mil, la cantidad de puntos no variará, conservando los 9000 puntos que tenía al inicio.  --" << std::endl;
     system("pause");
 }
 
 void onePlayer(char name[])
 {
-    
+
     int dado[6], i = 1, j, score = 0, roundPoints = 0;
     int roundPoint = 0, numberOfRelease = 0, comparePoints[8];
     bool v = true;
@@ -42,24 +42,25 @@ void onePlayer(char name[])
     for (j = 1; j <= 10; j++)
     {
         system("cls");
-        
-        if (score == 10000) {
+
+        if (score == 10000)
+        {
             j = 11;
             v = false;
         }
-        
+
         roundPoint = 0;
         char vv;
+        numberOfRelease = 0;
 
         while (v)
         {
-            numberOfRelease = 0;
             int diceRepetition[7] = {0, 0, 0, 0, 0, 0, 0};
             int comparePoints[8] = {0, 0, 0, 0, 0, 0, 0, 1};
             numberOfRelease++;
 
-            // cargarAleatorio(dado, 6, 6);
-            cargarVector(dado, 6);
+            cargarAleatorio(dado, 6, 6);
+            // cargarVector(dado, 6);
 
             /// start editing from from here
             for (i = 1; i <= 6; i++)
@@ -73,14 +74,17 @@ void onePlayer(char name[])
             comparePoints[5] = escaleraLarga(diceRepetition);
             comparePoints[6] = sexteto(diceRepetition);
 
+            int bestCombination = comparePoints[maximoVector(comparePoints, 7)];
+            int highestCombination = maximoVector(comparePoints, 8);
 
-            if (roundPoint + comparePoints[maximoVector(comparePoints, 7)] <= 10000)
-                roundPoint += comparePoints[maximoVector(comparePoints, 7)];
-            else if(roundPoint + comparePoints[maximoVector(comparePoints, 7)] > 10000)
+            if (roundPoint + bestCombination <= 10000)
+                roundPoint += bestCombination;
+            else
             {
                 system("cls");
                 std::cout << "Fin de ronda, por exceder el máximo puntaje acumulable" << std::endl;
                 roundPoint = 0;
+                break;
                 system("pause");
                 system("cls");
             }
@@ -98,45 +102,46 @@ void onePlayer(char name[])
             std::cout << std::endl;
             std::cout << std::endl;
 
-            std::cout << "Obtuviste ";
-            mostrar(maximoVector(comparePoints, 8));
-
-            if(maximoVector(comparePoints, 8) < 7){
-                std::cout << " + " << comparePoints[maximoVector(comparePoints, 7)] << " puntos!" << std::endl;
+            if (highestCombination < 7)
+            {
+                std::cout << "Obtuviste ";
+                show(highestCombination);
+                std::cout << " + " << bestCombination << " puntos!" << std::endl;
+            }
+            else
+            {
+                show(highestCombination);
+                roundPoint = 0;
             }
 
+            std::cout << std::endl;
+            std::cout << std::endl;
 
-            std::cout << std::endl;
-            std::cout << std::endl;
-            
             vv = 'n';
-            if(score < 10000 && maximoVector(comparePoints, 8) != 7 && roundPoint < 10000)
+            if (score < 10000 && highestCombination != 7 && roundPoint < 10000)
             {
                 std::cout << "¿CONTINUAR LANZANDO (S/N)?: ";
                 std::cin >> vv;
             }
 
             if (vv == 'S' || vv == 's')v = true;
-            
+
             if (vv == 'N' || vv == 'n')
             {
                 v = false;
-                if (roundPoint + score <= 10000)
-                    score += roundPoint;
-                    system("pause");
+                if (roundPoint + score <= 10000) score += roundPoint;
+                system("pause");
             }
 
             system("cls");
         }
+
+        if (j <= 10) v = true;
         
-        if(j <= 10) {
-            v = true;
-            numberOfRelease = 0;
-        }
     }
 }
 
-void mostrar(int winningCombination)
+void show(int winningCombination)
 {
     switch (winningCombination)
     {
