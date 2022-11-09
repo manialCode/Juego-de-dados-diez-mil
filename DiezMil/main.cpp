@@ -2,11 +2,13 @@
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
+#include <stdlib.h>
 #include <locale.h>
 #include <conio.h>
 #include "funciones.h"
-#include "juego.h"
 #include <string.h>
+#include <cstring>
+#include "juego.h"
 
 using namespace std;
 
@@ -14,9 +16,9 @@ int main()
 {
     setlocale(LC_ALL, "spanish");
 
-    int minRound = 0, maxScore = 0;
-    char playerOne[30], playerTwo[30];
-    int option = 0, *scoreMatch = 0;
+    int minRound = 0, maxScore = 0, bestRound[2];
+    char playerOne[30], playerTwo[30], bestPlayerName[30];
+    int option = 0, scoreMatch[3] = {0, 0, 0};         
     while (option != 5)
     {
         option = 0;
@@ -41,34 +43,38 @@ int main()
             printf("Por favor, ingrese el nombre del jugador uno: ");
             cargarCadena(playerOne, 30);
 
-            scoreMatch = onePlayer(playerOne);
+            onePlayer(playerOne, scoreMatch);
 
             break;
 
         case 2:
             printf("Por favor, ingrese el nombre del jugador uno: ");
             cargarCadena(playerOne, 30);
-            
+
             printf("Por favor, ingrese el nombre del jugador dos: ");
             cargarCadena(playerTwo, 30);
+
+            twoPlayer(playerOne, playerTwo, scoreMatch);
 
             break;
 
         case 3:
-            if (scoreMatch != 0)
+            if (scoreMatch[0] != 0)
             {
-                if (*(scoreMatch + 2) == 1)
-                    std::cout << "Nombre: " << playerOne << std::endl;
 
-                if (*(scoreMatch + 2) == 2)
-                    std::cout << "Nombre: " << playerTwo << std::endl;
+                if (minRound == 0 || scoreMatch[1] < minRound)
+                {
+                    minRound = scoreMatch[1];
 
-                if (maxScore == 0 || *scoreMatch > maxScore || *scoreMatch == 10000)
-                    maxScore = *scoreMatch;
+                    if (maxScore == 0 || scoreMatch[0] >= maxScore)
+                        maxScore = scoreMatch[0];
+
+                    if (scoreMatch[2] == 0)memcpy(bestPlayerName, playerOne, 30);
+                    else memcpy(bestPlayerName, playerTwo, 30);
+                }
+
+                std::cout << "Nombre: " << bestPlayerName << std::endl;
                 std::cout << "Puntaje: " << maxScore << std::endl;
-
-                if (minRound == 0 || (*(scoreMatch + 1)) < minRound)
-                    minRound = *(scoreMatch + 1);
                 std::cout << "Rondas Jugadas: " << minRound << std::endl;
             }
             else
@@ -83,6 +89,7 @@ int main()
             break;
 
         case 5:
+
             system("cls");
             cout << " ----------------" << endl;
             cout << "|Fin del programa|" << endl;
@@ -90,8 +97,7 @@ int main()
             break;
         default:
             cout << "la opción elegida no es valida";
-            option = 0;
-            system("pause");
+            system("cls");
             break;
         }
     }
