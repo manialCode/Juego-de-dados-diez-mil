@@ -51,8 +51,8 @@ void onePlayer(char name[], int onePlayerMatch[])
             int comparePoints[8] = {0, 0, 0, 0, 0, 0, 0, 1};
             numberOfRelease++;
 
-            // cargarAleatorio(dado, 6, 6);
-            cargarVector(dado, 6);
+            cargarAleatorio(dado, 6, 6);
+            // cargarVector(dado, 6);
 
             /// start editing from from here
             for (i = 1; i <= 6; i++)
@@ -169,8 +169,8 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
             int comparePoints[8] = {0, 0, 0, 0, 0, 0, 0, 1};
             numberOfRelease[p]++;
 
-            // cargarAleatorio(dado, 6, 6);
-            cargarVector(dado, 6);
+            cargarAleatorio(dado, 6, 6);
+            // cargarVector(dado, 6);
 
             /// start editing from from here
             for (i = 1; i <= 6; i++)
@@ -266,11 +266,9 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
         }
     }
 
-    p = maximoVector(score, 2);
-    
-    std::cout << winnerRound << std::endl;
     system("pause");
       
+        p = maximoVector(score, 2);
       onePlayerMatch[0] = score[p];
       onePlayerMatch[1] = winnerRound;
       onePlayerMatch[2] = p;
