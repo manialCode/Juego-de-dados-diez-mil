@@ -1,36 +1,10 @@
 #ifndef JUEGO_H_INCLUDED
 #define JUEGO_H_INCLUDED
 
-void show(int winningCombination);
 void onePlayer(char name[]);
 void twoPlayer(char nameOne[], char nameTwo[]);
 void reglas();
-
-void reglas()
-{
-    std::cout << "                   ||REGLAS DEL JUEGO||                    " << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- El objetivo del juego es obtener 10000 puntos en la menor cantidad de rondas posibles. Una ronda puede estar compuesta por varios lanzamientos. Un lanzamiento consiste en tirar seis dados y evaluar sus valores para determinar el puntaje." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- El puntaje de un lanzamiento esta determinado por una serie de reglas que figuran en la sección Combinaciones ganadoras." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- Si en un lanzamiento el jugador obtiene una combinación ganadora entonces acumulará provisoriamente el puntaje correspondiente." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- Luego de un lanzamiento ganador, el jugador debe elegir si desea volver a lanzar los dados o asegurarse el puntaje acumulado hasta el momento. Si en un lanzamiento el jugador no obtiene una combinación ganadora perderá todo el puntaje acumulado de esa ronda y será el turno del otro jugador." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- Esta es la razón por la que seguir lanzando es riesgoso. La posibilidad de hacer más puntos debe ser considerada con el riesgo de perder todo lo que se gana durante un turno." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- Una vez que un jugador decide finalizar el turno, todo el puntaje acumulado en el turno se acumulará al puntaje total del jugador." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "- Cuando un jugador obtiene exactamente 10000 puntos, el juego termina. Si un jugador se excede de los 10000 puntos volverá al puntaje que tenía previamente al comenzar la ronda." << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "         ||EJEMPLO||          " << std::endl;
-    std::cout << "" << std::endl;
-
-    std::cout << "--  Si en el inicio de una ronda el jugador tiene 9000 puntos y en transcurso de la ronda termina obteniendo 1500 puntos, entonces, como el puntaje acumulado total superará los diez mil, la cantidad de puntos no variará, conservando los 9000 puntos que tenía al inicio.  --" << std::endl;
-    system("pause");
-}
+void show(int winningCombination);
 
 void onePlayer(char name[], int onePlayerMatch[])
 {
@@ -42,8 +16,8 @@ void onePlayer(char name[], int onePlayerMatch[])
         system("cls");
 
         roundPoint = 0;
-        char vv;
         numberOfRelease = 0;
+        char vv;
 
         while (v)
         {
@@ -52,10 +26,8 @@ void onePlayer(char name[], int onePlayerMatch[])
             numberOfRelease++;
 
             cargarAleatorio(dado, 6, 6);
-            // cargarVector(dado, 6);
 
-            /// start editing from from here
-            for (i = 1; i <= 6; i++)
+            for (i = 0; i < 7; i++)
                 diceRepetition[i] = contarNumerosRepetidos(dado, i, 7);
 
             comparePoints[0] = juegoDeUno(diceRepetition);
@@ -70,7 +42,7 @@ void onePlayer(char name[], int onePlayerMatch[])
             int highestCombination = maximoVector(comparePoints, 8);
 
             roundPoint += bestCombination;
-            
+
             std::cout << "TURNO DE " << name << " | "
                       << "RONDA N°" << j << " | "
                       << "PUNTAJE TOTAL: " << score << " PUNTOS" << std::endl;
@@ -94,17 +66,19 @@ void onePlayer(char name[], int onePlayerMatch[])
                     score = 0;
                     roundPoint = 10000;
                 }
-                else std::cout << " + " << bestCombination << " puntos!" << std::endl;
+                else
+                    std::cout << " + " << bestCombination << " puntos!" << std::endl;
             }
             else
             {
                 show(highestCombination);
                 roundPoint = 0;
+                system("pause");
+                system("cls");
             }
 
             if (roundPoint != 10000 && roundPoint + bestCombination > 10000)
             {
-                system("cls");
                 std::cout << "Fin de ronda, por exceder el máximo puntaje acumulable" << std::endl;
                 roundPoint = 0;
                 system("pause");
@@ -118,7 +92,7 @@ void onePlayer(char name[], int onePlayerMatch[])
             vv = 'n';
             if (highestCombination != 7 && roundPoint < 10000)
             {
-                std::cout << "¿CONTINUAR LANZANDO (S/N)?: ";
+                std::cout << "¿CONTINUAR LANZANDO? (S/N): ";
                 std::cin >> vv;
             }
 
@@ -127,22 +101,44 @@ void onePlayer(char name[], int onePlayerMatch[])
 
             if (vv == 'N' || vv == 'n')
             {
-                if (roundPoint + score <= 10000) score += roundPoint;
+                if (roundPoint + score <= 10000)
+                    score += roundPoint;
                 v = false;
-                system("pause");
             }
 
-            if (score == 10000)
-            {
-                winnerRound = j;
-                v = false;
-                j = 11;
-            }
             system("cls");
         }
+        
+        if (score == 10000)
+        {
+            winnerRound = j;
+            v = false;
+            j = 11;
+        }
+
         if (j <= 10)
             v = true;
     }
+
+    system("cls");
+    std::cout << "-----------------------------------------";
+    std::cout << std::endl;
+    std::cout << "Puntaje final de ";
+    std::cout << name;
+    std::cout << ":" << std::endl;
+    std::cout << score;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "|La partida de " << name << " a terminado |";
+    std::cout << " En " << winnerRound << "RONDAS |";
+    std::cout << std::endl;
+    std::cout << "-----------------------------------------";
+    std::cout << std::endl;
+    system("pause");
+    system("cls");
 
     onePlayerMatch[0] = score;
     onePlayerMatch[1] = winnerRound;
@@ -170,9 +166,7 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
             numberOfRelease[p]++;
 
             cargarAleatorio(dado, 6, 6);
-            // cargarVector(dado, 6);
 
-            /// start editing from from here
             for (i = 1; i <= 6; i++)
                 diceRepetition[i] = contarNumerosRepetidos(dado, i, 7);
 
@@ -214,19 +208,22 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
                     score[p] = 0;
                     roundPoint[p] = 10000;
                 }
-                else std::cout << " + " << bestCombination << " puntos!" << std::endl;
+                else
+                    std::cout << " + " << bestCombination << " puntos!" << std::endl;
             }
             else
             {
+                
                 show(highestCombination);
                 roundPoint[p] = 0;
+                system("pause");
+                system("cls");
             }
 
             if (roundPoint[p] != 10000 && roundPoint[p] > 10000)
             {
                 system("cls");
                 std::cout << "Fin de ronda, por exceder el máximo puntaje acumulable" << std::endl;
-                system("pause");
             }
 
             std::cout << std::endl;
@@ -235,21 +232,56 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
             vv = 'n';
             if (highestCombination != 7 && roundPoint[p] < 10000)
             {
-                std::cout << "¿CONTINUAR LANZANDO (S/N)?: ";
+                std::cout << "¿CONTINUAR LANZANDO? (S/N): ";
                 std::cin >> vv;
             }
 
-            if (vv == 'S' || vv == 's')v = true;
+            if (vv == 'S' || vv == 's')
+                v = true;
 
             if (vv == 'N' || vv == 'n')
             {
-                if (roundPoint[p] + score[p] <= 10000) score[p] += roundPoint[p];
-                if(score[p] == 10000)p = 2;
-                else p++;
+                if (roundPoint[p] + score[p] <= 10000)
+                    score[p] += roundPoint[p];
+
+                if (score[p] == 10000)
+                    p = 2;
+                else
+                    p++;
+
+                system("cls");
+                std::cout << "               RONDA NUMERO: ";
+                std::cout << j << std::endl;
+                std::cout << "----------------------------------------";
+                std::cout << std::endl;
+                std::cout << std::endl;
+                std::cout << std::endl;
+
+                std::cout << "          PUNTAJE DE ";
+                if (p < 2)
+                    std::cout << nameOne;
+                else
+                    std::cout << nameTwo;
+                std::cout << ": ";
+                if (p < 2)
+                    std::cout << score[0] << std::endl;
+                else
+                    std::cout << score[1] << std::endl;
+                std::cout << std::endl;
+                std::cout << std::endl;
+                std::cout << "          PROXIMO TURNO: ";
+                if (p < 2)
+                    std::cout << nameTwo;
+                else
+                    std::cout << nameOne;
+                std::cout << std::endl;
+                std::cout << std::endl;
                 system("pause");
+                system("cls");
             }
 
-            if (p >= 2)v = false;
+            if (p >= 2)
+                v = false;
 
             system("cls");
         }
@@ -266,13 +298,48 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
         }
     }
 
+    system("cls");
+    std::cout << "-----------------------------------------";
+    std::cout << std::endl;
+    std::cout << "Puntaje final de ";
+    std::cout << nameOne;
+    std::cout << ":" << std::endl;
+    std::cout << score[0];
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Puntaje final de ";
+    std::cout << nameTwo;
+    std::cout << ":" << std::endl;
+    std::cout << score[1];
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "|El ganador es: ";
+    if (score[0] > score[1])
+    {
+        std::cout << nameOne;
+        std::cout << "|";
+    }
+    else
+    {
+        std::cout << nameTwo;
+        std::cout << "|";
+    }
+    std::cout << " En " << winnerRound << "RONDAS ";
+    std::cout << "|";
+    std::cout << std::endl;
+    std::cout << "-----------------------------------------";
+    std::cout << std::endl;
     system("pause");
-      
-        p = maximoVector(score, 2);
-      onePlayerMatch[0] = score[p];
-      onePlayerMatch[1] = winnerRound;
-      onePlayerMatch[2] = p;
+
+    p = maximoVector(score, 2);
+    onePlayerMatch[0] = score[p];
+    onePlayerMatch[1] = winnerRound;
+    onePlayerMatch[2] = p;
 }
+
 
 void show(int winningCombination)
 {
@@ -306,5 +373,32 @@ void show(int winningCombination)
         break;
     }
 }
+
+void reglas()
+{
+    std::cout << "                   ||REGLAS DEL JUEGO||                    " << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- El objetivo del juego es obtener 10000 puntos en la menor cantidad de rondas posibles. Una ronda puede estar compuesta por varios lanzamientos. Un lanzamiento consiste en tirar seis dados y evaluar sus valores para determinar el puntaje." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- El puntaje de un lanzamiento esta determinado por una serie de reglas que figuran en la sección Combinaciones ganadoras." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- Si en un lanzamiento el jugador obtiene una combinación ganadora entonces acumulará provisoriamente el puntaje correspondiente." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- Luego de un lanzamiento ganador, el jugador debe elegir si desea volver a lanzar los dados o asegurarse el puntaje acumulado hasta el momento. Si en un lanzamiento el jugador no obtiene una combinación ganadora perderá todo el puntaje acumulado de esa ronda y será el turno del otro jugador." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- Esta es la razón por la que seguir lanzando es riesgoso. La posibilidad de hacer más puntos debe ser considerada con el riesgo de perder todo lo que se gana durante un turno." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- Una vez que un jugador decide finalizar el turno, todo el puntaje acumulado en el turno se acumulará al puntaje total del jugador." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "- Cuando un jugador obtiene exactamente 10000 puntos, el juego termina. Si un jugador se excede de los 10000 puntos volverá al puntaje que tenía previamente al comenzar la ronda." << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "         ||EJEMPLO||          " << std::endl;
+    std::cout << "" << std::endl;
+
+    std::cout << "--  Si en el inicio de una ronda el jugador tiene 9000 puntos y en transcurso de la ronda termina obteniendo 1500 puntos, entonces, como el puntaje acumulado total superará los diez mil, la cantidad de puntos no variará, conservando los 9000 puntos que tenía al inicio.  --" << std::endl;
+    system("pause");
+}
+
 
 #endif
