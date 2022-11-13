@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1666621407 source:c:\users\alumno\desktop\diezmil\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<ctime>
+	<cstring>
+	"funciones.h"
+
+1666616498 c:\users\alumno\desktop\diezmil\funciones.h
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<ctime>
+

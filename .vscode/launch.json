@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Usuario/Desktop/TUP/Laboratorio I/DiezMil-20221026T141315Z-001/DiezMil",
-      "program": "c:/Users/Usuario/Desktop/TUP/Laboratorio I/DiezMil-20221026T141315Z-001/DiezMil/build/Debug/outDebug",
+      "cwd": "c:/Users/Usuario/Desktop/TUP/Laboratorio I/DiezMil-20221026T141315Z-001",
+      "program": "c:/Users/Usuario/Desktop/TUP/Laboratorio I/DiezMil-20221026T141315Z-001/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

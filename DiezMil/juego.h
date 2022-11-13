@@ -79,8 +79,10 @@ void onePlayer(char name[], int onePlayerMatch[])
 
             if (roundPoint != 10000 && roundPoint + bestCombination > 10000)
             {
+                std::cout << std::endl;
                 std::cout << "Fin de ronda, por exceder el máximo puntaje acumulable" << std::endl;
                 roundPoint = 0;
+                std::cout << std::endl;
                 system("pause");
                 system("cls");
                 break;
@@ -109,7 +111,7 @@ void onePlayer(char name[], int onePlayerMatch[])
             system("cls");
         }
         
-        if (score == 10000)
+        if (score == 10000 || j == 10)
         {
             winnerRound = j;
             v = false;
@@ -133,7 +135,7 @@ void onePlayer(char name[], int onePlayerMatch[])
     std::cout << std::endl;
 
     std::cout << "|La partida de " << name << " a terminado |";
-    std::cout << " En " << winnerRound << "RONDAS |";
+    std::cout << " En " << winnerRound << " RONDAS |";
     std::cout << std::endl;
     std::cout << "-----------------------------------------";
     std::cout << std::endl;
@@ -290,7 +292,7 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
         if (j <= 10)
             v = true;
 
-        if (score[0] == 10000 || score[1] == 10000)
+        if (score[0] == 10000 || score[1] == 10000 || j == 10)
         {
             winnerRound = j;
             j = 11;
@@ -327,7 +329,7 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
         std::cout << nameTwo;
         std::cout << "|";
     }
-    std::cout << " En " << winnerRound << "RONDAS ";
+    std::cout << " En " << winnerRound << " RONDAS |";
     std::cout << "|";
     std::cout << std::endl;
     std::cout << "-----------------------------------------";

@@ -16,31 +16,30 @@ int main()
 {
     setlocale(LC_ALL, "spanish");
 
-    int minRound = 0, maxScore = 0, bestRound[2];
-    char playerOne[30], playerTwo[30], bestPlayerName[30], option[1] = {'n'};
+    int minRound = 0, maxScore = 0, bestRound[2], option = 0;
+    char playerOne[30], playerTwo[30], bestPlayerName[30];
     int scoreMatch[3] = {0, 0, 0};
 
-    cout << "         ||MENU||          " << endl;
-    cout << "" << endl;
-    cout << "->  1.   1 jugador         <-" << endl;
-    cout << "->  2.   2 jugadores       <-" << endl;
-    cout << "->  3.   Valor máximo      <-" << endl;
-    cout << "->  4.   Reglas            <-" << endl;
-    cout << "->  5.   Fin del programa  <-" << endl;
-
-    std::cout << std::endl;
-    std::cout << "Ingrese la opción: ";
-    cargarCadena(option, 1);
-
-    while (option != '5')
+    while (option != 5)
     {
+        system("cls");
+        cout << "         ||MENU||          " << endl;
+        cout << "" << endl;
+        cout << "->  1.   1 jugador         <-" << endl;
+        cout << "->  2.   2 jugadores       <-" << endl;
+        cout << "->  3.   Valor máximo      <-" << endl;
+        cout << "->  4.   Reglas            <-" << endl;
+        cout << "->  5.   Fin del programa  <-" << endl;
+
+        std::cout << std::endl;
+        std::cout << "Ingrese la opción: ";
+        cin >> option;
         system("cls");
 
         switch (option)
         {
 
-        case '1':
-            system("cls");
+        case 1:
             printf("Por favor, ingrese el nombre del jugador uno: ");
             cargarCadena(playerOne, 30);
 
@@ -48,9 +47,7 @@ int main()
 
             break;
 
-        case '2':
-            system("cls");
-
+        case 2:
             printf("Por favor, ingrese el nombre del jugador uno: ");
             cargarCadena(playerOne, 30);
 
@@ -61,7 +58,7 @@ int main()
 
             break;
 
-        case '3':
+        case 3:
             if (scoreMatch[0] != 0)
             {
                 if (minRound == 0 || scoreMatch[1] < minRound)
@@ -78,46 +75,38 @@ int main()
                 }
 
                 std::cout << "Nombre: " << bestPlayerName << std::endl;
+                std::cout << std::endl;
                 std::cout << "Puntaje: " << maxScore << std::endl;
+                std::cout << std::endl;
                 std::cout << "Rondas Jugadas: " << minRound << std::endl;
             }
             else
+            {
+                std::cout << std::endl;
                 std::cout << "No hubo partidas registradas" << std::endl;
+                std::cout << std::endl;
+            }
             system("pause");
             break;
 
-        case '4':
-            system("cls");
+        case 4:
             reglas();
-            system("pause");
             break;
 
-        case '5':
+        case 5:
 
-            system("cls");
             cout << " ----------------" << endl;
             cout << "|Fin del programa|" << endl;
             cout << " ----------------";
             break;
 
         default:
-            system("cls");
+            std::cout << std::endl;
             cout << "la opción elegida no es valida";
+            std::cout << std::endl;
             system("pause");
             break;
         }
-
-        cout << "         ||MENU||          " << endl;
-        cout << "" << endl;
-        cout << "->  1.   1 jugador         <-" << endl;
-        cout << "->  2.   2 jugadores       <-" << endl;
-        cout << "->  3.   Valor máximo      <-" << endl;
-        cout << "->  4.   Reglas            <-" << endl;
-        cout << "->  5.   Fin del programa  <-" << endl;
-
-        std::cout << std::endl;
-        std::cout << "Ingrese la opción: ";
-        cargarCadena(option, 1);
     }
 
     cout << endl;
