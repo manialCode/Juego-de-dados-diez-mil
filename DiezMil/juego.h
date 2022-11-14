@@ -21,14 +21,15 @@ void onePlayer(char name[], int onePlayerMatch[])
 
         while (v)
         {
-            int diceRepetition[7] = {0, 0, 0, 0, 0, 0, 0};
+            int diceRepetition[6] = {0, 0, 0, 0, 0, 0};
             int comparePoints[8] = {0, 0, 0, 0, 0, 0, 0, 1};
             numberOfRelease++;
 
-            cargarAleatorio(dado, 6, 6);
+            //cargarAleatorio(dado, 6, 6);
+            cargarVector(dado, 6);
 
-            for (i = 0; i < 7; i++)
-                diceRepetition[i] = contarNumerosRepetidos(dado, i, 7);
+            for (i = 0; i < 6; i++)
+                diceRepetition[i] = contarNumerosRepetidos(dado, (i + 1), 6);
 
             comparePoints[0] = juegoDeUno(diceRepetition);
             comparePoints[1] = juegoDeCinco(diceRepetition);
@@ -77,7 +78,7 @@ void onePlayer(char name[], int onePlayerMatch[])
                 system("cls");
             }
 
-            if (roundPoint != 10000 && roundPoint + bestCombination > 10000)
+            if (roundPoint > 10000)
             {
                 std::cout << std::endl;
                 std::cout << "Fin de ronda, por exceder el máximo puntaje acumulable" << std::endl;
@@ -86,13 +87,20 @@ void onePlayer(char name[], int onePlayerMatch[])
                 system("pause");
                 system("cls");
                 break;
+            } else if(score + roundPoint > 10000){
+                std::cout << std::endl;
+                std::cout << "Fin de ronda, por exceder el máximo puntaje" << std::endl;
+                roundPoint = 0;
+                std::cout << std::endl;
+                system("pause");
+                system("cls");
             }
 
             std::cout << std::endl;
             std::cout << std::endl;
 
             vv = 'n';
-            if (highestCombination != 7 && roundPoint < 10000)
+            if (highestCombination != 7 && roundPoint < 10000 && roundPoint + score < 10000)
             {
                 std::cout << "¿CONTINUAR LANZANDO? (S/N): ";
                 std::cin >> vv;
@@ -110,7 +118,7 @@ void onePlayer(char name[], int onePlayerMatch[])
 
             system("cls");
         }
-        
+
         if (score == 10000 || j == 10)
         {
             winnerRound = j;
@@ -163,14 +171,15 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
 
         while (v)
         {
-            int diceRepetition[7] = {0, 0, 0, 0, 0, 0, 0};
+            int diceRepetition[6] = {0, 0, 0, 0, 0, 0};
             int comparePoints[8] = {0, 0, 0, 0, 0, 0, 0, 1};
             numberOfRelease[p]++;
 
-            cargarAleatorio(dado, 6, 6);
+            cargarVector(dado, 6);
+            //cargarAleatorio(dado, 6, 6);
 
-            for (i = 1; i <= 6; i++)
-                diceRepetition[i] = contarNumerosRepetidos(dado, i, 7);
+            for (i = 0; i < 6; i++)
+                diceRepetition[i] = contarNumerosRepetidos(dado, (i + 1), 6);
 
             comparePoints[0] = juegoDeUno(diceRepetition);
             comparePoints[1] = juegoDeCinco(diceRepetition);
@@ -215,24 +224,31 @@ void twoPlayer(char nameOne[], char nameTwo[], int onePlayerMatch[])
             }
             else
             {
-                
+
                 show(highestCombination);
                 roundPoint[p] = 0;
                 system("pause");
                 system("cls");
             }
 
-            if (roundPoint[p] != 10000 && roundPoint[p] > 10000)
+            if (roundPoint[p] > 10000)
             {
                 system("cls");
                 std::cout << "Fin de ronda, por exceder el máximo puntaje acumulable" << std::endl;
+            }else if(score[p] + bestCombination > 10000){
+                std::cout << std::endl;
+                std::cout << "Fin de ronda, por exceder el máximo puntaje" << std::endl;
+                roundPoint[p] = 0;
+                std::cout << std::endl;
+                system("pause");
+                system("cls");
             }
 
             std::cout << std::endl;
             std::cout << std::endl;
 
             vv = 'n';
-            if (highestCombination != 7 && roundPoint[p] < 10000)
+            if (highestCombination != 7 && roundPoint[p] < 10000 && roundPoint[p] + score[p] < 10000)
             {
                 std::cout << "¿CONTINUAR LANZANDO? (S/N): ";
                 std::cin >> vv;
