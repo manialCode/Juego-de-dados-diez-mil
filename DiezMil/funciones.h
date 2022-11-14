@@ -183,7 +183,7 @@ void cargarVector(int v[], int tam)
     for (i = 0; i < tamano; i++)
     {
         palabra[i] = std::cin.get();
-        if (palabra[i] == '\n') break;   
+        if (palabra[i] == '\n') break;
     }
 
     palabra[i] = '\0';
@@ -193,9 +193,9 @@ void cargarVector(int v[], int tam)
 
 int juegoDeUno(int combination[])
 {
-    if (combination[1] == 1)
+    if (combination[0] == 1)
         return 100;
-    else if (combination[1] == 2)
+    else if (combination[0] == 2)
         return 200;
     else
         return 0;
@@ -203,16 +203,16 @@ int juegoDeUno(int combination[])
 
 int juegoDeCinco(int combination[])
 {
-    if (combination[5] == 1)
+    if (combination[4] == 1)
         return 50;
-    else if(combination[5] == 2)
+    else if(combination[4] == 2)
         return 100;
     else return 0;
 }
 
 int trioDeUno(int combination[])
 {
-    if (combination[1] == 3)
+    if (combination[0] == 3)
         return 1000;
     else
         return 0;
@@ -220,18 +220,18 @@ int trioDeUno(int combination[])
 
 int trioDeX(int combination[])
 {
-    int i, posLast;
-    for (i = 2; i <= 6; i++)
-        if (combination[i] >= 3) posLast = i;
-    
+    int posLast = 0;
+    for (int i = 1; i < 6; i++)
+        if (combination[i] >= 3) posLast = i ;
+
     if(combination[posLast] >= 3)
-        return posLast * 100;
+        return (posLast + 1) * 100;
     else return 0;
 }
 
 int trioUnoAmpliado(int combination[])
 {
-    if (combination[1] == 4 || combination[1] == 5)
+    if (combination[0] == 4 || combination[0] == 5)
         return 2000;
     else
         return 0;
@@ -241,7 +241,7 @@ int escaleraLarga(int combination[])
 {
     int i, c = 0;
 
-    for (i = 1; i <= 6; i++)
+    for (i = 0; i < 7; i++)
         if (combination[i] == 1)
             c++;
 
@@ -253,7 +253,7 @@ int escaleraLarga(int combination[])
 
 int sexteto(int combination[])
 {
-    if (combination[1] == 6)
+    if (combination[0] == 6)
         return 10000;
     else
         return 0;
